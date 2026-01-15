@@ -15,7 +15,6 @@ const App: React.FC = () => {
   const [isLocationModalOpen, setIsLocationModalOpen] = useState(false);
   const [activeTab, setActiveTab] = useState('Home');
 
-  // Persistence logic - ensures cart survives refresh
   useEffect(() => {
     const savedCart = localStorage.getItem('thts-cart');
     if (savedCart) {
@@ -73,7 +72,14 @@ const App: React.FC = () => {
 
     const message = `🔥 *${RESTAURANT_NAME} Order* 🔥\n\n*Items:*\n${orderDetails}\n\n*Total: Rs. ${total}*\n\n📍 ${locationText}`;
     const encodedMessage = encodeURIComponent(message);
-    const whatsappUrl = `https://wa.me/${RESTAURANT_PHONE.replace('+', '')}?text=${encodedMessage}`;
+    
+    // Ensure phone number is in international format (92...)
+    let cleanPhone = RESTAURANT_PHONE.replace(/\D/g, '');
+    if (cleanPhone.startsWith('0')) {
+      cleanPhone = '92' + cleanPhone.substring(1);
+    }
+    
+    const whatsappUrl = `https://wa.me/${cleanPhone}?text=${encodedMessage}`;
     
     window.open(whatsappUrl, '_blank');
     setIsLocationModalOpen(false);

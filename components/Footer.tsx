@@ -15,7 +15,8 @@ const Footer: React.FC<FooterProps> = ({ name, details }) => {
   // Using the exact coordinates provided: 31.62351922729357, 74.28883317021581
   const lat = 31.62351922729357;
   const lng = 74.28883317021581;
-  const mapEmbedUrl = `https://maps.google.com/maps?q=${lat},${lng}&hl=en&z=17&output=embed`;
+  // Use www.google.com for better trust validation on iOS Safari
+  const mapEmbedUrl = `https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d1000!2d${lng}!3d${lat}!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2s!4v1234567890`;
 
   return (
     <footer id="contact" className="bg-black border-t border-zinc-900 pt-20 pb-10">
@@ -30,14 +31,14 @@ const Footer: React.FC<FooterProps> = ({ name, details }) => {
             Bringing the fiercest flavors to the heart of Shahdara. Our kitchen is always roaring.
           </p>
           <div className="flex gap-4">
-            <a href="#" className="w-10 h-10 rounded-full border border-zinc-800 flex items-center justify-center hover:bg-red-600 transition-colors">
-              <i className="fab fa-facebook-f"></i>
+            <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full border border-zinc-800 flex items-center justify-center hover:bg-red-600 transition-colors">
+              <i className="fab fa-facebook-f text-white"></i>
             </a>
-            <a href="#" className="w-10 h-10 rounded-full border border-zinc-800 flex items-center justify-center hover:bg-red-600 transition-colors">
-              <i className="fab fa-instagram"></i>
+            <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full border border-zinc-800 flex items-center justify-center hover:bg-red-600 transition-colors">
+              <i className="fab fa-instagram text-white"></i>
             </a>
-            <a href="https://wa.me/923054319696" target="_blank" className="w-10 h-10 rounded-full border border-zinc-800 flex items-center justify-center hover:bg-green-600 transition-colors">
-              <i className="fab fa-whatsapp"></i>
+            <a href="https://wa.me/923054319696" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full border border-zinc-800 flex items-center justify-center hover:bg-green-600 transition-colors">
+              <i className="fab fa-whatsapp text-white"></i>
             </a>
           </div>
         </div>

@@ -4,8 +4,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- SECURITY: Force HTTPS for all resources to fix "Not Safe" warning on iPhone -->
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+    
     <title>Too Hot Too Spicy | Taste That Burns 🔥</title>
-    <!-- Assets: Using relative and stable CDN paths -->
+    
+    <!-- SEO & TRUST: Helps mobile browsers verify the site's legitimacy -->
+    <meta name="description" content="Lahore's premium destination for bold flavors. Signature Pizzas, Burgers, and Fusion Street Food.">
+    <meta property="og:title" content="Too Hot Too Spicy | Taste That Burns 🔥">
+    <meta property="og:description" content="Experience the fiercest flavors in Shahdara. Order online via WhatsApp.">
+    <meta property="og:type" content="website">
+    <meta name="theme-color" content="#0a0a0a">
+    
+    <!-- FAVICON: Prevents Safari from flagging the site as an unverified/generic site -->
+    <link rel="icon" type="image/png" href="https://cdn-icons-png.flaticon.com/512/822/822143.png">
+
+    <!-- Assets: Using stable HTTPS CDN paths -->
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -45,7 +60,7 @@
         }
     </style>
 
-    <!-- FIXED: Unified Import Map to prevent version conflicts (root cause of blank page) -->
+    <!-- FIXED: Unified Import Map to prevent version conflicts -->
     <script type="importmap">
     {
       "imports": {
@@ -61,7 +76,6 @@
 </head>
 <body>
     <div id="root"></div>
-    <!-- FIXED: Relative module path for Vercel deployment -->
     <script type="module" src="./index.tsx"></script>
 </body>
 </html>
