@@ -1,0 +1,7 @@
+{
+  "name": "Too Hot Too Spicy",
+  "description": "A premium fast-food restaurant website featuring a modern dark-spicy aesthetic, interactive menu, persistent cart, and WhatsApp checkout with geolocation support.",
+  "requestFramePermissions": [
+    "geolocation"
+  ]
+}
