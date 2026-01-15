@@ -73,7 +73,6 @@ const App: React.FC = () => {
     const message = `🔥 *${RESTAURANT_NAME} Order* 🔥\n\n*Items:*\n${orderDetails}\n\n*Total: Rs. ${total}*\n\n📍 ${locationText}`;
     const encodedMessage = encodeURIComponent(message);
     
-    // Ensure phone number is in international format (92...)
     let cleanPhone = RESTAURANT_PHONE.replace(/\D/g, '');
     if (cleanPhone.startsWith('0')) {
       cleanPhone = '92' + cleanPhone.substring(1);
@@ -81,7 +80,8 @@ const App: React.FC = () => {
     
     const whatsappUrl = `https://wa.me/${cleanPhone}?text=${encodedMessage}`;
     
-    window.open(whatsappUrl, '_blank');
+    // SECURE: Use noopener/noreferrer to improve Safari safety score
+    window.open(whatsappUrl, '_blank', 'noopener,noreferrer');
     setIsLocationModalOpen(false);
   };
 

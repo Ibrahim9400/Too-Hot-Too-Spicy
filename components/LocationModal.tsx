@@ -19,6 +19,14 @@ const LocationModal: React.FC<LocationModalProps> = ({ isOpen, onClose, onConfir
   const handleAutoFill = () => {
     setIsLoading(true);
     setError(null);
+
+    // SECURITY: Safari requires a strictly secure context for Geolocation
+    if (!window.isSecureContext) {
+      setError("Secure connection required for location services.");
+      setIsLoading(false);
+      return;
+    }
+
     if (!navigator.geolocation) {
       setError("Geolocation is not supported by your browser");
       setIsLoading(false);
@@ -39,7 +47,7 @@ const LocationModal: React.FC<LocationModalProps> = ({ isOpen, onClose, onConfir
         setError("Location access denied. Please enter address manually.");
         setIsLoading(false);
       },
-      { enableHighAccuracy: true }
+      { enableHighAccuracy: true, timeout: 5000 }
     );
   };
 
@@ -106,7 +114,7 @@ const LocationModal: React.FC<LocationModalProps> = ({ isOpen, onClose, onConfir
             value={address}
             onChange={(e) => {
               setAddress(e.target.value);
-              if (tempCoords) setTempCoords(null); // Reset auto-fill if user edits manually
+              if (tempCoords) setTempCoords(null);
             }}
             placeholder="Enter delivery address manually..."
             className="w-full h-32 bg-black border border-zinc-800 rounded-2xl p-4 text-white placeholder-zinc-600 focus:border-red-600 focus:ring-1 focus:ring-red-600 outline-none transition-all resize-none"
