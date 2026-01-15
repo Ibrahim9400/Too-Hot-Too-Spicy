@@ -5,52 +5,63 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Too Hot Too Spicy | Taste That Burns 🔥</title>
+    <!-- Assets: Using relative and stable CDN paths -->
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;800&family=Playfair+Display:ital,wght@0,700;1,700&display=swap" rel="stylesheet">
-    <!-- FIXED: Added stable Font Awesome 6 CDN -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <style>
+    
+    <!-- FIXED: Process shim to prevent 'process is not defined' crash on Vercel -->
+    <script>
+      window.process = { env: { NODE_ENV: 'production' } };
+    </script>
+
+    <style id="main-styles">
         body {
             font-family: 'Outfit', sans-serif;
             background-color: #0a0a0a;
             color: #ffffff;
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
         }
-        .font-brand {
-            font-family: 'Playfair Display', serif;
-        }
-        .spicy-gradient {
-            background: linear-gradient(135deg, #dc2626 0%, #f97316 100%);
-        }
+        .font-brand { font-family: 'Playfair Display', serif; }
+        .spicy-gradient { background: linear-gradient(135deg, #dc2626 0%, #f97316 100%); }
         .spicy-text-gradient {
             background: linear-gradient(135deg, #dc2626 0%, #f97316 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
-        .card-shadow {
-            box-shadow: 0 10px 30px -5px rgba(220, 38, 38, 0.1);
-        }
-        .scrollbar-hide::-webkit-scrollbar {
-            display: none;
-        }
-        /* Ensure icons don't inherit family from body */
-        .fa, .fas, .fab {
+        .card-shadow { box-shadow: 0 10px 30px -5px rgba(220, 38, 38, 0.1); }
+        .scrollbar-hide::-webkit-scrollbar { display: none; }
+        
+        /* FIXED: Icon font-family and visibility override */
+        .fa, .fas, .fab, .fa-solid {
             font-family: "Font Awesome 6 Free" !important;
             font-weight: 900;
+            display: inline-block;
+            color: inherit;
         }
     </style>
-<script type="importmap">
-{
-  "imports": {
-    "react/": "https://esm.sh/react@^19.2.3/",
-    "react": "https://esm.sh/react@^19.2.3",
-    "react-dom/": "https://esm.sh/react-dom@^19.2.3/"
-  }
-}
-</script>
+
+    <!-- FIXED: Unified Import Map to prevent version conflicts (root cause of blank page) -->
+    <script type="importmap">
+    {
+      "imports": {
+        "react": "https://esm.sh/react@19.0.0",
+        "react-dom": "https://esm.sh/react-dom@19.0.0",
+        "react-dom/client": "https://esm.sh/react-dom@19.0.0/client",
+        "react/jsx-runtime": "https://esm.sh/react@19.0.0/jsx-runtime",
+        "react/": "https://esm.sh/react@19.0.0/",
+        "react-dom/": "https://esm.sh/react-dom@19.0.0/"
+      }
+    }
+    </script>
 </head>
 <body>
     <div id="root"></div>
+    <!-- FIXED: Relative module path for Vercel deployment -->
+    <script type="module" src="./index.tsx"></script>
 </body>
 </html>

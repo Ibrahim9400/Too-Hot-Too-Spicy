@@ -1,13 +1,13 @@
 
-import React, { useState, useEffect, useCallback } from 'react';
-import { MenuItem, CartItem, LocationData } from './types';
-import { MENU_ITEMS, RESTAURANT_NAME, RESTAURANT_PHONE, LOCATION_DETAILS } from './constants';
-import Navbar from './components/Navbar';
-import Hero from './components/Hero';
-import MenuGrid from './components/MenuGrid';
-import CartModal from './components/CartModal';
-import LocationModal from './components/LocationModal';
-import Footer from './components/Footer';
+import React, { useState, useEffect } from 'react';
+import { MenuItem, CartItem, LocationData } from './types.ts';
+import { MENU_ITEMS, RESTAURANT_NAME, RESTAURANT_PHONE, LOCATION_DETAILS } from './constants.tsx';
+import Navbar from './components/Navbar.tsx';
+import Hero from './components/Hero.tsx';
+import MenuGrid from './components/MenuGrid.tsx';
+import CartModal from './components/CartModal.tsx';
+import LocationModal from './components/LocationModal.tsx';
+import Footer from './components/Footer.tsx';
 
 const App: React.FC = () => {
   const [cart, setCart] = useState<CartItem[]>([]);
@@ -15,14 +15,14 @@ const App: React.FC = () => {
   const [isLocationModalOpen, setIsLocationModalOpen] = useState(false);
   const [activeTab, setActiveTab] = useState('Home');
 
-  // Persistence
+  // Persistence logic - ensures cart survives refresh
   useEffect(() => {
     const savedCart = localStorage.getItem('thts-cart');
     if (savedCart) {
       try {
         setCart(JSON.parse(savedCart));
       } catch (e) {
-        console.error("Failed to load cart", e);
+        console.warn("Cart parsing failed, resetting...");
       }
     }
   }, []);
@@ -77,8 +77,6 @@ const App: React.FC = () => {
     
     window.open(whatsappUrl, '_blank');
     setIsLocationModalOpen(false);
-    // Optional: Clear cart after checkout
-    // setCart([]);
   };
 
   return (
